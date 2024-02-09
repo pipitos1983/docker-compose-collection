@@ -1,0 +1,22 @@
+version: '3'
+services:
+  code:
+    image: collabora/code:latest
+    restart: unless-stopped
+    hostname: collabora
+    container_name: collabora
+    environment:
+      password: ${COLLABORA_PASSWORD}
+      username: ${COLLABORA_USERNAME}
+      domain: ${COLLABORA_DOMAIN}
+      aliasgroup1: https://${APP_DOMAIN}
+      dictionaries: en ru
+      TZ: "Europe/Moscow"
+    ports:
+      - 9980:9980
+    volumes:
+      - ./ssl/fullchain.pem:/etc/coolwsd/ca-chain.cert.pem
+      - ./ssl/privkey.pem:/etc/coolwsd/key.pem
+      - ./ssl/fullchain.pem:/etc/coolwsd/cert.pem
+    cap_add:
+      - MKNOD

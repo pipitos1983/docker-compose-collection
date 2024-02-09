@@ -1,0 +1,17 @@
+version: '3'
+services:
+  documentserver:
+    image: onlyoffice/documentserver:7.1
+    restart: unless-stopped
+    hostname: documentserver
+    container_name: documentserver
+    ports:
+      - 9980:80
+      - 9443:443
+    volumes:
+      - ./data/ssl:/var/www/onlyoffice/Data/certs
+      - ./data/logs:/var/log/onlyoffice
+      - ./data/storage:/var/www/onlyoffice/Data
+#      - ./data/local.json:/etc/onlyoffice/documentserver/local.json
+#    cap_add:
+#      - MKNOD

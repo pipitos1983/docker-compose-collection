@@ -1,0 +1,24 @@
+# vim: tabstop=2 shiftwidth=2 expandtab
+
+version: '3'
+services:
+
+  youtrack:
+    image: jetbrains/youtrack:2023.3.24329
+    container_name: "youtrack"
+    hostname: "youtrack"
+    volumes:
+      - ./youtrack/data:/opt/youtrack/data
+      - ./youtrack/conf:/opt/youtrack/conf
+      - ./youtrack/logs:/opt/youtrack/logs
+      - ./youtrack/backups:/opt/youtrack/backups
+    ports:
+      - "8080:8080"
+    networks:
+      - ut-network
+
+
+networks:
+  ut-network:
+    name: ut-network
+    external: false
